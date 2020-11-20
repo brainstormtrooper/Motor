@@ -1,0 +1,4 @@
+modules/*
+!modules/index.html
+config/*
+!config/config.php.in

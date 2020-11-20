@@ -1,0 +1,68 @@
+<?php
+/*
+ * This file contains all the default config settings for the system.
+ * Most can be overridden in modules.
+ *
+ * @Version: 0.2
+ * @Date: 31/08/2012
+ */
+
+$localhost = array(
+    '127.0.0.1',
+    '::1'
+);
+
+if(in_array($_SERVER['REMOTE_ADDR'], $localhost)){
+    $mysqli_config = array(
+		'host' => '',
+		'user' => '',
+		'pass' => '',
+		'database' => ''
+	);
+} else {
+	$mysqli_config = array(
+		'host' => '',
+		'user' => '',
+		'pass' => '',
+		'database' => ''
+	);
+}
+
+$config=array(
+	'core_version'	=>	'0.4-3',
+			
+	'core_modules'	=>	array(
+			'Form',
+			'Permissions',
+			'Translate',
+			'Response'
+	),
+	'mysqli_config' => array(array(
+			$mysqli_config
+		)
+			
+	),
+	
+	'userThemeDir' => $GLOBALS['INSTALL_ROOT'] . '/mbr/tpl/',
+	'userModDir' => $GLOBALS['INSTALL_ROOT'] . '/modules/',
+	'themePath' => $GLOBALS['INSTALL_ROOT'] . '/core/view/',
+	'themeFile' => 'defaultTpl.html',
+	'comDir' => $GLOBALS['INSTALL_ROOT'] . '/core/com/',
+	'appRoot' => $GLOBALS['INSTALL_ROOT'],
+	'userTheme' => 'default/',
+	'tmpDir' => '/tmp/',
+	
+		
+);
+
+$config['mysqli_config']['default'] = $config['mysqli_config'][0];
+$config['path'] = array(
+		$config['userModDir'],
+		$config['comDir'],
+		$config['appRoot']
+
+);
+
+$config['cacheDir'] = $config['appRoot'] . 'cache/';
+
+?>

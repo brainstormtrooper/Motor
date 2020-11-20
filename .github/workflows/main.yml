@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI_FTP
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  release:
+    # we should get GITHUB_REF = tag in release
+    types: [published]
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "web-deploy"
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get tag ref
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: brainstormtrooper/Motor  # The repository to scan.
+        releases-only: true  # We know that all relevant tags have a GitHub release for them.
+      id: octokit  # The step ID to refer to later.
+    - name: Get latest code
+      uses: actions/checkout@v2.3.2
+      with:
+        repository: brainstormtrooper/Motor  # Download that repository.
+        ref: ${{ steps.octokit.outputs.tag }}
+        # ref: ${GITHUB_REF:10}
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ftpperso.free.fr
+        username: formdemo
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: ./4/
