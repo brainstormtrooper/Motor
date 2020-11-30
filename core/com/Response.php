@@ -1,7 +1,8 @@
 <?php
 
 class Response{
-    
+	
+	private static $_instance;
 	protected $themePath = '';
 	protected $themeFile = '';
 	protected $template = '';
@@ -11,7 +12,7 @@ class Response{
 	
 	
 	
-    function response(){
+    function __construct(){
     	$tfstr = $GLOBALS['config']['userThemeDir'] . (isset($_GET['where'])?$_GET['where'] . '/':'default/');
     	$mfstr = $GLOBALS['config']['userModDir'] . (isset($_GET['where'])?$_GET['where'] . '/view/':'default/view/');
     	$fstr = (isset($_GET['what'])?$_GET['what'] . 'Tpl.html':'defaultTpl.html');
@@ -32,10 +33,28 @@ class Response{
     		//print '<p>tpl using systme core folder : ' . $this->template . '</p>';
     	}   	
         
-    }
+	}
+	
+	public static function init(){
+		if(self::$_instance == null){
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
     
-    
-    
+    public function setHeader($headerStr, $replace=true){
+		header($headerStr, $replace);
+	}
+
+	public function getHeaders(){
+		return headers_list();
+	}
+	
+	public function delHeader($headerName){
+		header_remove($headerName);
+	}
+	
+
     private function readTpl($filename) {
     	//$filename = $themePath . $themeFile;
     	return file_get_contents($filename);

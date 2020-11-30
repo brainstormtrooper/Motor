@@ -12,11 +12,12 @@
  */
 class Permissions {
 
+	private static $_instance;
 	private $levels = array();
 	private $perms = array();
 	protected $myperms = 'bob';
 
-	function permissions() {
+	function __construct() {
 		
 		include dirname(__FILE__) . '/permissions/permissionsConfig.php';
 		/**
@@ -38,10 +39,15 @@ class Permissions {
 		
 		//$_SESSION['motor']['currentUser'] = 'bob';
 		//$_SESSION['motor']['currentGroup'] = 'users,bobgrp';
+
 		
-		
-		
-		
+	}
+
+	public static function init(){
+		if(self::$_instance == null){
+			self::$_instance = new self();
+		}
+		return self::$_instance;
 	}
 	
 	/**

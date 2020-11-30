@@ -20,12 +20,6 @@ $GLOBALS['INSTALL_ROOT'] = dirname(__FILE__);
 include 'config/config.php';
 
 
-/*
- * Get motor and create an instance
- */
-
-require 'Motor.php';
-
 //$path = dirname(__FILE__);
 //set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 spl_autoload_register(function ($class) {
@@ -42,7 +36,7 @@ spl_autoload_register(function ($class) {
 	
 });
 
-$M = Motor::init();
+$C = Calls::init();
 
 
 /*
@@ -59,7 +53,7 @@ $f=(isset($_GET['what'])?$_GET['what']:'index');
 //
 //
 $args = array('where'=>$m, 'what'=>$f);
-$result = $M->mtr_ctrlcall($args);
+$result = $C->ctrlCall($args);
 
 print $result;
 
