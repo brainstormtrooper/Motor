@@ -78,7 +78,7 @@ class Permissions {
 	}
 	
 	private function _me($udata) {
-		$M = Motor::init();
+		$M = Messages::init();
 		$me = (isset($_SESSION['motor']['currentUser'])?$_SESSION['motor']['currentUser']:'*');
 		$mygrp = (isset($_SESSION['motor']['currentGroup'])?$_SESSION['motor']['currentGroup']:'*');
 		$curusr = $me . "@@" . $mygrp;
@@ -137,7 +137,7 @@ class Permissions {
 	}
 
 	function setPermissions($args){
-		$GLOBALS['config']['permissions'][$args['component']][] = array ($args['items'], $args['usrgrp'], $args['code']);
+		$GLOBALS['config']['permissions'][$args['component']][] = $args['rule'];
 	}
     
     function isLoggedinSession($args){
@@ -153,7 +153,7 @@ class Permissions {
 		 * returns the rules for a given request.
 		 * 
 		 */
-		$M = Motor::init();
+		$M = Messages::init();
         
 		
 		
@@ -244,7 +244,7 @@ class Permissions {
 		 * 
 		 */
 
-        $M = Motor::init();
+        $M = Messages::init();
 		
 		$perms = $this->getPermissions($args); //now I have the component array, get the user and actual bit...
 		//if(($perms!='')&&(stristr($perms, $args['perm'])!==false))

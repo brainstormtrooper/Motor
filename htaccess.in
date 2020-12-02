@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule bob /index.php?where=index&what=bob

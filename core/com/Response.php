@@ -41,6 +41,10 @@ class Response{
 		}
 		return self::$_instance;
 	}
+
+	public function setResCode($code) {
+		http_response_code($code);
+	}
     
     public function setHeader($headerStr, $replace=true){
 		header($headerStr, $replace);
