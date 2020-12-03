@@ -130,7 +130,7 @@ class Response{
     	}
     	//print '<p>module tpl path is : ' . $template . '</p>';
     	//$themeFile = 'defaultTpl.html';
-    	$M = Motor::init();
+    	$M = Messages::init();
     	$vals['mmessages'] = $M->Result->messages;
     	$this->values = $vals;
     	$result = $this->readTpl($template);

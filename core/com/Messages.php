@@ -53,7 +53,8 @@ class Messages {
 		$caller = $this->GetCallingMethod($depth);
 		$from = ' FROM : ' . $caller['function'] . ' in ' . $caller['file'] . ' on line ' . $caller['line'] . '. ';
 		// level, message, degrade, halt
-		$this->Result->messages[$time] = $time . ':: ' . strtoupper($args['level']) . ' (' . $this->where . ', ' . $this->what . ') ' . $args['message'] . $from;
+        // $this->Result->messages[$time] = $time . ':: ' . strtoupper($args['level']) . ' (' . $this->where . ', ' . $this->what . ') ' . $args['message'] . $from;
+        $this->Result->messages[$time] = $time . ':: ' . strtoupper($args['level']) . $args['message'] . $from;
 	}
 	
 	/**
