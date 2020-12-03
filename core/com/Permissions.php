@@ -136,7 +136,7 @@ class Permissions {
 		
 	}
 
-	function setPermissions($args){
+	function setPermission($args){
 		$GLOBALS['config']['permissions'][$args['component']][] = $args['rule'];
 	}
     

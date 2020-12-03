@@ -35,7 +35,7 @@ class Data {
 		return false;
 	}
 	
-	protected function insert($values, $table, $exceptions, $criteria) {
+	protected function insert($values, $table, $exceptions = '', $criteria = '') {
 		return false;
 	}
 	

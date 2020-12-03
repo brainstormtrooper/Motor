@@ -80,7 +80,7 @@ class MySqlData extends Data{
 		return $this->insertUpdate($values, $table, $exceptions, 'update', $sql_condition);
 	}
 	
-	protected function insert($values, $table, $exceptions, $criteria) {
+	protected function insert($values, $table, $exceptions = '', $criteria = '') {
 		// $values, $table, $exceptions = '', $sql_type = 'insert', $sql_condition = NULL		
 		return $this->insertUpdate($values, $table, $exceptions, 'insert');
 	}
@@ -160,7 +160,7 @@ class MySqlData extends Data{
 	// $sql_type - has to be 'insert' or 'update'
 	// $sql_condition - have to define this if $sql_type = 'update'
 	//                  i.e. "userID = '".$_POST['userID']."'"
-	private function insertUpdate($values, $table, $exceptions = '', $sql_type = 'insert', $sql_condition = NULL) {
+	private function insertUpdate($cols, $table, $exceptions = '', $sql_type = 'insert', $sql_condition = NULL) {
 		
 		
 		// define some vars
@@ -168,7 +168,7 @@ class MySqlData extends Data{
 		$values = '';
 	
 		// format input fields into sql
-		foreach ($values as $field => $value) {
+		foreach ($cols as $field => $value) {
 			if (!preg_match("/$field, /", $exceptions)) {
 				$value = mysqli_real_escape_string($this->connect(), $value);
 				if ($sql_type == 'insert') {
